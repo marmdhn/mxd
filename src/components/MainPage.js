@@ -8,7 +8,7 @@ function MainPage({ onNext, onForeignConfirm }) {
 
   return (
     <motion.div
-      className="min-vh-100 d-flex flex-column align-items-center justify-content-center text-white"
+      className="min-vh-100 d-flex flex-column align-items-center justify-content-center text-white mx-3"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
