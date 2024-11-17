@@ -5,6 +5,9 @@ import FinalPage from "./components/FinalPage";
 
 function App() {
   const [step, setStep] = useState(1);
+
+  const [isForeign, setIsForeign] = useState(false);
+
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
@@ -27,18 +30,24 @@ function App() {
         type: "audio/mpeg",
       },
       {
-        title: "Keep You Safe",
+        title: isForeign ? "Asing" : "Keep You Safe",
         artist: "Artist 3",
-        src: "/song/Yahya - keepyousafe.mp3",
+        src: isForeign
+          ? "/song/Juicy Luicy - Asing.mp3"
+          : "/song/Yahya - keepyousafe.mp3",
         type: "audio/mpeg",
       },
     ];
-  }, []);
+  }, [isForeign]);
 
   useEffect(() => {
     const accept = localStorage.getItem("accepted");
-
-    if (accept) setStep(3);
+    if (accept === "1") {
+      setStep(3);
+    } else if (accept === "0") {
+      setIsForeign(true);
+      setStep(3);
+    }
   }, []);
 
   useEffect(() => {
@@ -62,6 +71,11 @@ function App() {
     });
   };
 
+  const handleForeignConfirm = () => {
+    setIsForeign(true);
+    setStep(3);
+  };
+
   return (
     <div>
       <div
@@ -76,8 +90,10 @@ function App() {
         Your browser does not support the audio element.
       </audio>
       {step === 1 && !isOverlayVisible && <LandingPage onNext={nextStep} />}
-      {step === 2 && <MainPage onNext={nextStep} />}
-      {step === 3 && <FinalPage onBack={prevStep} />}
+      {step === 2 && (
+        <MainPage onForeignConfirm={handleForeignConfirm} onNext={nextStep} />
+      )}
+      {step === 3 && <FinalPage isForeign={isForeign} onBack={prevStep} />}
       <div className="background" style={{ zIndex: "-999" }}>
         <span></span>
         <span></span>
