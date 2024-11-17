@@ -14,12 +14,13 @@ function LandingPage({ onNext }) {
 
   return (
     <div className="min-vh-100 d-flex flex-column align-items-center justify-content-center text-white">
-      <div className="text-center mt-5">
+      <div className="text-center mt-5 mx-3">
         <motion.h1
           key={text}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
+          className="fw-bold mb-3"
         >
           {text}
         </motion.h1>
@@ -29,10 +30,10 @@ function LandingPage({ onNext }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Aku punya sesuatu yang mau aku omongin, yaa berhubungan sama yg kamu
-          minta tanya langsung itu sii, <br />
+          Aku ada yang mau aku omongin, berhubungan sama yg kamu minta tanya
+          langsung itu sii, <br />
           tapi bingung gimana jadi ku sampein dari web aja yah karna aku kan
-          role FE hehehe ...
+          role FE hehehe...
         </motion.p>
         <motion.button
           initial={{ opacity: 0, y: 50 }}
