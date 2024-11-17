@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import CheckListModal from "./CheckListModal";
 import Footer from "./Footer";
 
-function MainPage({ onNext }) {
+function MainPage({ onNext, onForeignConfirm }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -17,6 +17,7 @@ function MainPage({ onNext }) {
         initial={{ scale: 0.8 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.8 }}
+        className="text-center"
       >
         Aku gatau ini waktu yang tepat atau enggk yaah, dan aku jg tau ini belum
         lama hehe
@@ -45,7 +46,12 @@ function MainPage({ onNext }) {
         <span className="text-black-50">apa tuh?</span>
       </motion.div>
 
-      {showModal && <CheckListModal onConfirm={onNext} />}
+      {showModal && (
+        <CheckListModal
+          onForeignConfirm={onForeignConfirm}
+          onConfirm={onNext}
+        />
+      )}
       <Footer />
     </motion.div>
   );
