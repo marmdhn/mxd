@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-function CheckListModal({ onConfirm }) {
+function CheckListModal({ onConfirm, onForeignConfirm }) {
   const [checked, setChecked] = useState([
     false,
     false,
@@ -26,8 +26,13 @@ function CheckListModal({ onConfirm }) {
   const isAllChecked = checked.every((item) => item);
 
   const handleConfirm = () => {
-    localStorage.setItem("accepted", true);
+    localStorage.setItem("accepted", "1");
     onConfirm();
+  };
+
+  const handleForeignConfirm = () => {
+    localStorage.setItem("accepted", "0");
+    onForeignConfirm();
   };
 
   return (
@@ -111,8 +116,12 @@ function CheckListModal({ onConfirm }) {
                 >
                   Terima
                 </motion.button>
-                <button className="btn btn-danger" disabled>
-                  Belum Bisa
+                <button
+                  className="btn btn-danger"
+                  disabled={!isAllChecked}
+                  onClick={handleForeignConfirm}
+                >
+                  Asing
                 </button>
               </div>
             </div>
